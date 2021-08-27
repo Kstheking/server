@@ -3,6 +3,7 @@ var router = express.Router();
 
 const products = [
   {
+    id: 1,
     imageSource: "assets/images/donuts/blueDonut.svg",
     name: "Blue Donut",
     price: 34,
@@ -10,6 +11,7 @@ const products = [
     quantityInCart: 0
   },
   {
+    id: 2,
     imageSource: "assets/images/donuts/darkOrangeDonut.svg",
     name: "Dark Orange Donut",
     price: 34,
@@ -17,6 +19,7 @@ const products = [
     quantityInCart: 0
   },
   {
+    id: 3,
     imageSource: "assets/images/donuts/greenDonut.svg",
     name: "Green Donut",
     price: 34,
@@ -24,6 +27,7 @@ const products = [
     quantityInCart: 10
   },
   {
+    id: 4,
     imageSource: "assets/images/donuts/lightBlueDonut.svg",
     name: "Light Blue Donut",
     price: 34,
@@ -31,6 +35,7 @@ const products = [
     quantityInCart: 0
   },
   {
+    id: 5,
     imageSource: "assets/images/donuts/orangeDonut.svg",
     name: "Orange Donut",
     price: 34,
@@ -38,6 +43,7 @@ const products = [
     quantityInCart: 0
   },
   {
+    id: 6,
     imageSource: "assets/images/donuts/pinkDonut.svg",
     name: "Pink Donut",
     price: 34,
@@ -45,6 +51,7 @@ const products = [
     quantityInCart: 10
   },
   {
+    id: 7,
     imageSource: "assets/images/donuts/purpleDonut.svg",
     name: "Purple Donut",
     price: 34,
@@ -52,6 +59,7 @@ const products = [
     quantityInCart: 0
   },
   {
+    id: 8,
     imageSource: "assets/images/donuts/violetDonut.svg",
     name: "Violet Donut",
     price: 34,
@@ -88,7 +96,6 @@ router.post('/', (req, res) => {
   }
 
   product.id = products.length + 1;
-  product.quantityInCart = 0;
   products.push(product);
   return res.status(200).json(product);
 });
