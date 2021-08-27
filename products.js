@@ -105,7 +105,8 @@ router.patch('/:id', (req, res) => {
   const foundProduct = products.find((product) => product.id == productId);
   if (foundProduct) {
     let changeInQuantity = req.body.changeInQuantity;
-    foundProduct.quantityInCart += changeInQuantity;
+    foundProduct.quantity += changeInQuantity;
+    foundProduct.quantityInCart -= changeInQuantity;
     return res.status(200).json({msg: 'Successfully updated cart'});
   }
   return res.status(400).json({msg: 'Product with id ' + productId + ' not found.'});
