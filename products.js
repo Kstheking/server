@@ -70,6 +70,7 @@ const products = [
 
 router.get('/', (req, res) => {
   var query = (req.query['q'] || '').toLowerCase();
+  if(query == "") return res.status(200).json(products);
   if (query) {
     const foundProducts = products.filter(
       (product) => product.name.toLowerCase().indexOf(query) != -1);
