@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router();
+var jwt = require('jsonwebtoken');
 
 const products = [
   {
@@ -66,15 +67,16 @@ const products = [
     quantity: 10,
     quantityInCart: 0
   },
-  // {
-  //   id: 1,
-  //   name: 'Test Product - 1',
-  //   imageUrl: 'http://via.placeholder.com/150x150',
-  //   price: 50,
-  //   isOnSale: true,
-  //   quantityInCart: 0
-  // },
 ];
+
+var checkIfLoggedIn = (req, res, next) => {
+  var token = req.get('X-AUTH-HEADER');
+  var user = jwt.decode(token);
+  if (user && user.user) {
+    return next();
+  }
+  return res.status(403).json({msg: 'Please login to access this information'});
+};
 
 router.get('/', (req, res) => {
   var query = (req.query['q'] || '').toLowerCase();
@@ -87,7 +89,7 @@ router.get('/', (req, res) => {
   return res.status(200).json(products);
 });
 
-router.post('/', (req, res) => {
+router.post('/', checkIfLoggedIn, (req, res) => {
   let product = req.body;
 
   if (product.id) {
@@ -100,7 +102,7 @@ router.post('/', (req, res) => {
   return res.status(200).json(product);
 });
 
-router.patch('/:id', (req, res) => {
+router.patch('/:id',checkIfLoggedIn, (req, res) => {
   let productId = req.params.id;//change it to use names
   const foundProduct = products.find((product) => product.id == productId);
   if (foundProduct) {
