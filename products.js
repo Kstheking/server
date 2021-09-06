@@ -89,6 +89,16 @@ router.get('/', (req, res) => {
   return res.status(200).json(products);
 });
 
+router.get('/:id', (req, res) => {
+  let productId = req.params.id;
+  const foundProduct = products.find((product) => product.id == productId);
+  if (foundProduct) {
+    res.json(foundProduct);
+  } else {
+    return res.status(400).json({msg: 'Product with id ' + productId + ' not found.'})
+  }
+});
+
 router.post('/', checkIfLoggedIn, (req, res) => {
   let product = req.body;
 
