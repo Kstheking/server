@@ -3,6 +3,10 @@ const bodyParser = require('body-parser');
 const app = express()
 
 app.use(bodyParser());
+app.use(cors());
+
+
+
 app.get('/', (req, res) => res.send('Hello World!'));
 
 app.use('/api/user', require('./user'));
